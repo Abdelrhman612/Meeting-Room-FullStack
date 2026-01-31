@@ -1,14 +1,8 @@
-
-import './App.css'
+import "./App.css";
+import MeetingRoom from "./pages/MeetingRoom";
 
 function App() {
-  
-
-  return (
-    <>
-      <h1>Meeting Project Frontend</h1>
-    </>
-  )
+  return <MeetingRoom />;
 }
 
-export default App
+export default App;
