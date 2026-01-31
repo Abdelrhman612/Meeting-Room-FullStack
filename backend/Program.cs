@@ -1,6 +1,7 @@
 using backend;
 using backend.Models;
 using backend.Repositories;
+using JobMeeting.Api.Hubs;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
+
+var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("React-App", policy =>
+    {
+        policy.WithOrigins(allowedOrigins ?? Array.Empty<string>())
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -30,7 +44,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.MapHub<MeetingHub>("/meetingHub");
+app.UseCors("React-App");
 app.UseAuthorization();
 app.MapControllers();
 app.MapGet("/", () => "Server is running...");
