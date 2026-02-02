@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Data.Models;
+using backend.DataBase.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models
@@ -19,5 +20,6 @@ namespace backend.Models
             modelBuilder.Entity<User>().Property(r => r.Role).HasDefaultValue("user");
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Room> Rooms { get; set; }
     }
 }
