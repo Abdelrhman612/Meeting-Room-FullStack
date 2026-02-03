@@ -26,7 +26,7 @@ namespace backend
         }
 
         public async Task<Room?> GetRoomByCodeAsync(string code)
-            => await _repo.GetByCodeAsync(code);
+=> await _repo.GetByCodeAsync(code);
     }
 
 }
