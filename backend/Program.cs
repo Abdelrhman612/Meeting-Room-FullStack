@@ -1,8 +1,14 @@
+using System.Text;
 using backend;
+using backend.InterFaces.Auth;
 using backend.Models;
 using backend.Repositories;
+using backend.Services.Auth;
+using backend.Utils.Jwt;
 using JobMeeting.Api.Hubs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +18,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddSignalR();
+
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    options.UseSqlServer(connectionString);
+});
 
 var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
 builder.Services.AddCors(options =>
@@ -25,17 +38,40 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddDbContext<AppDbContext>(options =>
+
+var jwt = builder.Configuration.GetSection("JWT").Get<Jwt>();
+if (jwt != null)
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    options.UseSqlServer(connectionString);
-});
+    builder.Services.AddSingleton(jwt);
+    builder.Services.AddSingleton<IJwtService>(provider => new JwtService(jwt));
+}
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = jwt?.Issuer,
+            ValidateAudience = true,
+            ValidAudience = jwt?.Audience,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt?.Key ?? "fallback_key"))
+        };
+    });
+
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<IRoomService, RoomService>();
+
+
 
 var app = builder.Build();
 
@@ -47,9 +83,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.MapHub<MeetingHub>("/meetingHub");
+
+
+
 app.UseCors("React-App");
+
+app.UseAuthentication();
 app.UseAuthorization();
+app.MapHub<MeetingHub>("/meetingHub");
 app.MapControllers();
 app.MapGet("/", () => "Server is running...");
 app.Run();
