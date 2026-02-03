@@ -144,3 +144,4 @@ D:\Projects\MeetingProject\backend\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalys
 D:\Projects\MeetingProject\backend\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Projects\MeetingProject\backend\bin\Debug\net8.0\BCrypt.Net-Next.dll
 D:\Projects\MeetingProject\backend\obj\Debug\net8.0\backend.sourcelink.json
+D:\Projects\MeetingProject\backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
