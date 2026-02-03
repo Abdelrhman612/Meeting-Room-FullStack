@@ -14,11 +14,7 @@ namespace backend.Models
         {
 
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>().Property(r => r.Role).HasDefaultValue("user");
-        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
     }
