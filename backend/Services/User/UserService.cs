@@ -41,13 +41,17 @@ namespace backend
 
         public Task<User> CreateUser(CreateUserDto userDto)
         {
+            var Name = userDto.Name;
+            var Email = userDto.Email;
+            var Role = (UserRole)Enum.Parse(typeof(UserRole), userDto.Role);
+
             var HashPassword = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
             var user = new User
             {
-                Name = userDto.Name,
-                Email = userDto.Email,
+                Name = Name,
+                Email = Email,
                 Password = HashPassword,
-                Role = userDto.Role
+                Role = Role
             };
 
             var existingUsers = _repo.GetAllAsync().Result;
@@ -56,7 +60,14 @@ namespace backend
                 throw new Exception("Email already exists");
             }
 
-            return _repo.AddUserAsync(user);
+
+            var AddUser = new User
+            {
+                Name = Name,
+                Email = Email,
+                Role = Role
+            };
+            return _repo.AddUserAsync(AddUser);
 
         }
 
@@ -67,7 +78,7 @@ namespace backend
                 Id = Id,
                 Name = userDto.Name,
                 Email = userDto.Email,
-                Role = userDto.Role
+                Role = (UserRole)Enum.Parse(typeof(UserRole), userDto.Role)
             };
             return _repo.UpdateUserAsync(user);
         }
