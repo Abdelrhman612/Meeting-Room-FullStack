@@ -13,7 +13,7 @@ namespace backend.Controllers.Auth
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _auth;
-        
+
         public AuthController(IAuthService auth)
         {
             _auth = auth;
@@ -25,10 +25,10 @@ namespace backend.Controllers.Auth
             return user;
         }
         [HttpPost("SginIn")]
-        public async Task<string> SginIn(SginInDto sginInDto)
+        public async Task<IActionResult> SginIn(SginInDto sginInDto)
         {
             var token = await _auth.SginIn(sginInDto);
-            return token;
+            return Ok(new { Token = token });
         }
 
     }
