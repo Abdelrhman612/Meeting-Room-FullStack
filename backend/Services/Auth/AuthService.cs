@@ -20,12 +20,12 @@ namespace backend.Services.Auth
             _jwtService = jwtService;
 
         }
-        public Task<SginUpDto> SginUp(SginUpDto sginUpDto)
+        public Task<SignUpDto> SginUp(SignUpDto signUpDto)
         {
-            var Name = sginUpDto.Name;
-            var Email = sginUpDto.Email;
-            var Password = sginUpDto.Password;
-            var Role = sginUpDto.Role;
+            var Name = signUpDto.Name;
+            var Email = signUpDto.Email;
+            var Password = signUpDto.Password;
+            var Role = signUpDto.Role;
 
             var HashPassword = BCrypt.Net.BCrypt.HashPassword(Password);
             var NewUser = new User
@@ -43,7 +43,7 @@ namespace backend.Services.Auth
             }
             _repo.AddUser(NewUser);
 
-            var UserRegistered = new SginUpDto
+            var UserRegistered = new SignUpDto
             {
                 Name = Name,
                 Email = Email,
@@ -53,10 +53,10 @@ namespace backend.Services.Auth
             return Task.FromResult(UserRegistered);
 
         }
-        public async Task<string> SginIn(SginInDto sginInDto)
+        public async Task<string> SginIn(SignInDto signInDto)
         {
-            var Email = sginInDto.Email;
-            var Password = sginInDto.Password;
+            var Email = signInDto.Email;
+            var Password = signInDto.Password;
 
             var user = await _repo.GetUserByEmail(new User { Email = Email });
 
