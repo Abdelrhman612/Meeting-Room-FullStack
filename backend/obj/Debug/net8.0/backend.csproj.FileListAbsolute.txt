@@ -145,3 +145,5 @@ D:\Projects\MeetingProject\backend\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalys
 D:\Projects\MeetingProject\backend\bin\Debug\net8.0\BCrypt.Net-Next.dll
 D:\Projects\MeetingProject\backend\obj\Debug\net8.0\backend.sourcelink.json
 D:\Projects\MeetingProject\backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Projects\MeetingProject\backend\bin\Debug\net8.0\package-lock.json
+D:\Projects\MeetingProject\backend\bin\Debug\net8.0\package.json
