@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using backend.Dto.Room;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace backend.Controllers.Room
 {
@@ -18,16 +19,20 @@ namespace backend.Controllers.Room
 
         [HttpPost]
         [Authorize]
-
-        public async Task<IActionResult> Create(RoomDto dto)
+        public async Task<IActionResult> Create([FromBody] RoomDto dto)
         {
+            // Get user ID from JWT token
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+            {
+                return Unauthorized(new { message = "Invalid user ID in token" });
+            }
 
-            var room = await _service.CreateRoomAsync(dto, dto.HostUserId);
+            var room = await _service.CreateRoomAsync(dto, userId);
             return Ok(room);
         }
 
         [HttpGet("{code}")]
-        [Authorize]
         public async Task<IActionResult> GetByCode(string code)
         {
             var room = await _service.GetRoomByCodeAsync(code);

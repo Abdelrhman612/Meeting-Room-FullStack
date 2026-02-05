@@ -8,8 +8,8 @@ namespace backend.InterFaces.Auth
 {
     public interface IAuthService
     {
-        Task<SginUpDto> SginUp(SginUpDto sginUpDto);
-        Task<string> SginIn(SginInDto sginInDto);
-        
+        Task<SignUpDto> SginUp(SignUpDto signUpDto);
+        Task<string> SginIn(SignInDto signInDto);
+
     }
 }

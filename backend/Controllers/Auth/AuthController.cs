@@ -18,16 +18,16 @@ namespace backend.Controllers.Auth
         {
             _auth = auth;
         }
-        [HttpPost("SginUp")]
-        public async Task<SginUpDto> SginUp(SginUpDto sginUpDto)
+        [HttpPost("SignUp")]
+        public async Task<SignUpDto> SginUp(SignUpDto signUpDto)
         {
-            var user = await _auth.SginUp(sginUpDto);
+            var user = await _auth.SginUp(signUpDto);
             return user;
         }
-        [HttpPost("SginIn")]
-        public async Task<IActionResult> SginIn(SginInDto sginInDto)
+        [HttpPost("SignIn")]
+        public async Task<IActionResult> SginIn(SignInDto signInDto)
         {
-            var token = await _auth.SginIn(sginInDto);
+            var token = await _auth.SginIn(signInDto);
             return Ok(new { Token = token });
         }
 
