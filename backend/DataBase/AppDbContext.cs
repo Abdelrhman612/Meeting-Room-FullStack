@@ -14,8 +14,30 @@ namespace backend.Models
         {
 
         }
+        override protected void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<RoomUser>()
+                          .HasOne(ru => ru.User)
+                          .WithMany(u => u.RoomUsers)
+                          .HasForeignKey(ru => ru.UserId)
+                          .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<RoomUser>()
+                .HasOne(ru => ru.Room)
+                .WithMany(r => r.RoomUsers)
+                .HasForeignKey(ru => ru.RoomId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+
+
+
+        }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomUser> RoomUsers { get; set; }
+
     }
 }
