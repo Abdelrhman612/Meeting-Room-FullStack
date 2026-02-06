@@ -22,6 +22,32 @@ namespace backend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("RoomUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("JoinedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RoomUsers");
+                });
+
             modelBuilder.Entity("backend.Data.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -79,6 +105,25 @@ namespace backend.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("RoomUser", b =>
+                {
+                    b.HasOne("backend.DataBase.Models.Room", "Room")
+                        .WithMany("RoomUsers")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("backend.Data.Models.User", "User")
+                        .WithMany("RoomUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Room");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("backend.DataBase.Models.Room", b =>
                 {
                     b.HasOne("backend.Data.Models.User", "HostUser")
@@ -88,6 +133,16 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.Navigation("HostUser");
+                });
+
+            modelBuilder.Entity("backend.Data.Models.User", b =>
+                {
+                    b.Navigation("RoomUsers");
+                });
+
+            modelBuilder.Entity("backend.DataBase.Models.Room", b =>
+                {
+                    b.Navigation("RoomUsers");
                 });
 #pragma warning restore 612, 618
         }
