@@ -13,6 +13,9 @@ namespace backend.Data.Models
         public string Email { get; set; } = string.Empty;
         public UserRole Role { get; set; } = UserRole.User;
 
+        public ICollection<RoomUser> RoomUsers { get; set; } = new List<RoomUser>();
+
+
     }
     public enum UserRole
     {
