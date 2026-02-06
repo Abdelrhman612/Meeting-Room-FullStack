@@ -12,8 +12,8 @@ namespace backend.DataBase.Models
         public int Id { get; set; }
 
         [Required]
-        public string Code { get; set; } = null!; 
-        
+        public string Code { get; set; } = null!;
+
         [Required]
         public string Name { get; set; } = null!;
 
@@ -21,6 +21,8 @@ namespace backend.DataBase.Models
 
         public int HostUserId { get; set; }
         public User HostUser { get; set; } = null!;
+        public ICollection<RoomUser> RoomUsers { get; set; } = new List<RoomUser>();
+
     }
 
 }
