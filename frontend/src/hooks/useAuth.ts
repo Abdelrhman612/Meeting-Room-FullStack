@@ -39,6 +39,8 @@ export const useAuth = () => {
       return { success: false, error: 'Registration failed' };
     }
   };
+  
+
 
   const logout = () => {
     authService.logout();
