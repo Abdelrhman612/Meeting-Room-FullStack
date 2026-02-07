@@ -29,7 +29,7 @@ namespace backend
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
 
         public async Task<IActionResult> FindById(int id)
         {
