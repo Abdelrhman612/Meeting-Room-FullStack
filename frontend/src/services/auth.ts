@@ -4,12 +4,12 @@ import api from './api';
 
 export const authService = {
   signIn: async (data: SignInDto): Promise<AuthResponse> => {
-    const response = await api.post('/api/auth/signin', data);
+    const response = await api.post('/api/Auth/SignIn', data);
     return response.data;
   },
 
   signUp: async (data: SignUpDto): Promise<User> => {
-    const response = await api.post('/api/auth/signup', data);
+    const response = await api.post('/api/Auth/SignUp', data);
     return response.data;
   },
 

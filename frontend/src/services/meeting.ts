@@ -12,15 +12,15 @@ export const meetingService = {
   },
 
   joinRoom: async (data: JoinRoomDto): Promise<void> => {
-    await api.post('/api/roomuser/join', data);
+    await api.post('/api/RoomUser/join', data);
   },
 
   leaveRoom: async (data: JoinRoomDto): Promise<void> => {
-    await api.post('/api/roomuser/leave', data);
+    await api.post('/api/RoomUser/leave', data);
   },
 
   getRoomUsers: async (roomId: number): Promise<number[]> => {
-    const response = await api.get(`/api/roomuser/${roomId}/users`);
+    const response = await api.get(`/api/RoomUser/${roomId}/users`);
     return response.data.userIds;
   },
 };
