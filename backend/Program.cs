@@ -1,9 +1,11 @@
 using System.Text;
 using backend;
 using backend.InterFaces.Auth;
+using backend.InterFaces.UserRoom;
 using backend.Models;
 using backend.Repositories;
 using backend.Services.Auth;
+using backend.Services.RoomUser;
 using backend.Utils.Jwt;
 using JobMeeting.Api.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -70,6 +72,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<IRoomService, RoomService>();
+
+builder.Services.AddScoped<IRoomUserRepository, RoomUserRepository>();
+builder.Services.AddScoped<IRoomUserService, RoomUserService>();
 
 
 
