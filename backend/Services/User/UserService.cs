@@ -65,6 +65,7 @@ namespace backend
             {
                 Name = Name,
                 Email = Email,
+                Password = HashPassword,
                 Role = Role
             };
             return _repo.AddUserAsync(AddUser);
