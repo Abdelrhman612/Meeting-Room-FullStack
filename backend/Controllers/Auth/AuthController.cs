@@ -58,36 +58,7 @@ namespace backend.Controllers.Auth
             });
         }
 
-        [HttpPut("profile")]
-        [Authorize]
-        public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileDto dto)
-        {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
-            {
-                return Unauthorized(new { message = "Invalid user ID in token" });
-            }
 
-            var updateDto = new UpdateUserDto
-            {
-                Name = dto.Name,
-                Email = dto.Email,
-                Password = dto.Password,
-
-            };
-
-            var user = await _user.UpdateUser(updateDto, userId);
-            return Ok(new
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                Role = user.Role.ToString()
-            });
-
-
-        }
-        
 
     }
 }

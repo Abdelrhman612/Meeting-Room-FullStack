@@ -47,7 +47,7 @@ namespace backend
             return Ok(user);
         }
         [HttpPatch("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
 
         public async Task<IActionResult> Update([FromRoute] int Id, [FromBody] UpdateUserDto userDto)
         {
