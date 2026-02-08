@@ -33,3 +33,11 @@ export interface SignUpDto {
   password: string;
   role: 'Admin' | 'User';
 }
+
+export interface ProfileData {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  createdAt?: string;
+}

@@ -19,11 +19,13 @@ export const useAuth = () => {
   const login = async (email: string, password: string) => {
     try {
       const { token } = await authService.signIn({ email, password });
-      const user = await authService.getProfile();
       
-      localStorage.setItem('token', token);
+    
+      localStorage.setItem('token', token);      
+      const user = await authService.getProfile();
       localStorage.setItem('user', JSON.stringify(user));
       setUser(user);
+
       
       return { success: true };
     } catch (error) {
@@ -39,6 +41,8 @@ export const useAuth = () => {
       return { success: false, error: 'Registration failed' };
     }
   };
+
+  
   
 
 
@@ -47,5 +51,5 @@ export const useAuth = () => {
     setUser(null);
   };
 
-  return { user, loading, login, register, logout };
+  return { user, loading, login, register, logout  };
 };
