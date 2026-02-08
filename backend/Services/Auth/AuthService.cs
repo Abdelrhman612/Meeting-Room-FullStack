@@ -25,7 +25,7 @@ namespace backend.Services.Auth
             var Name = signUpDto.Name;
             var Email = signUpDto.Email;
             var Password = signUpDto.Password;
-            var Role = signUpDto.Role;
+
 
             var HashPassword = BCrypt.Net.BCrypt.HashPassword(Password);
             var NewUser = new User
@@ -33,7 +33,7 @@ namespace backend.Services.Auth
                 Name = Name,
                 Email = Email,
                 Password = HashPassword,
-                Role = Role
+
             };
 
             var isEmailExists = _repo.GetUserByEmail(NewUser).Result?.Email;
@@ -47,7 +47,6 @@ namespace backend.Services.Auth
             {
                 Name = Name,
                 Email = Email,
-                Role = Role
 
             };
             return Task.FromResult(UserRegistered);
