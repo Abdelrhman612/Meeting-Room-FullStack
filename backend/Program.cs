@@ -41,7 +41,7 @@ builder.Services.AddCors(options =>
 });
 
 
-var jwt = builder.Configuration.GetSection("JWT").Get<Jwt>();
+var jwt = builder.Configuration.GetSection("Jwt").Get<Jwt>();
 if (jwt != null)
 {
     builder.Services.AddSingleton(jwt);

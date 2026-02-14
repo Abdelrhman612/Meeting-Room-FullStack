@@ -4204,19 +4204,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\abdo\\.nuget\\packages\\": {}
+    "/home/abdelrahman-ayman/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\Projects\\MeetingProject\\backend\\backend.csproj",
+      "projectUniqueName": "/home/abdelrahman-ayman/Projects/Meeting-Room-FullStack/backend/backend.csproj",
       "projectName": "backend",
-      "projectPath": "d:\\Projects\\MeetingProject\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\abdo\\.nuget\\packages\\",
-      "outputPath": "d:\\Projects\\MeetingProject\\backend\\obj\\",
+      "projectPath": "/home/abdelrahman-ayman/Projects/Meeting-Room-FullStack/backend/backend.csproj",
+      "packagesPath": "/home/abdelrahman-ayman/.nuget/packages/",
+      "outputPath": "/home/abdelrahman-ayman/Projects/Meeting-Room-FullStack/backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\abdo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/abdelrahman-ayman/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -4234,11 +4234,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4295,7 +4290,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.123/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

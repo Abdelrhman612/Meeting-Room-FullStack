@@ -38,9 +38,7 @@ namespace backend
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
-
-
+        [Authorize(Roles = "Admin" )]
         public async Task<IActionResult> Create([FromBody] CreateUserDto userDto)
         {
             var user = await _user.CreateUser(userDto);
