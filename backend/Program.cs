@@ -80,6 +80,7 @@ builder.Services.AddScoped<IRoomUserService, RoomUserService>();
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -88,8 +89,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-
 
 app.UseCors("React-App");
 
